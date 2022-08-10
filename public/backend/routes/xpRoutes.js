@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router()
+const {getXp} = require('../controllers/xpController');
 
-router.get('/', (req, res) => {
-  res.status(200).json({message: 'Get XP'})
-});
+router.get('/', getXp);
+
 
 router.post('/', (req, res) => {
   res.status(200).json({message: 'Post XP'})
