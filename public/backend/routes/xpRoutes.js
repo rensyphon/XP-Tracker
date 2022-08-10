@@ -2,14 +2,12 @@ const express = require('express');
 const router = express.Router()
 const {getXp, setXp, updateXp, deleteXp,} = require('../controllers/xpController');
 
-router.get('/', getXp);
+router.route('/').get(getXp).post(setXp);
 
-router.post('/', setXp);
-
-router.put('/:id', updateXp);
-
-router.delete('/:id', deleteXp);
+router.route('/:id').put(updateXp).delete(deleteXp);
 
 
 
-module.exports = router
+
+
+module.exports = router;
