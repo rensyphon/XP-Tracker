@@ -10,7 +10,7 @@ const getXp = asyncHandler(async (req, res) => {
 // POST Xp 
 // @route POST /api/xp
 // @access authentication will be required
-const setXp = asyncHandler(async (req, res) => {
+
   if(!req.body.text) {
     res.status(400)
     throw new Error('Please add a text field')
@@ -18,8 +18,7 @@ const setXp = asyncHandler(async (req, res) => {
 
   }
   res.status(200).json({message: 'Set Xp'})
-  
-});
+
 
 // PUT Xp 
 // @route PUT /api/xp/:id
