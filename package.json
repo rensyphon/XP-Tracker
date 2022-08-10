@@ -15,8 +15,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node public/backend/server.js",
-    "server": "nodemon public/backend/server.js",
+    "start": "node client/public/backend/server.js",
+    "server": "nodemon client/public/backend/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
