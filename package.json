@@ -15,12 +15,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    
+    "start": "node public/backend/server.js",
+    "server": "nodemon public/backend/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [
