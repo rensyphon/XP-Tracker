@@ -1,0 +1,17 @@
+
+  
+  .box {
+    margin: 0 auto;
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #0a3042;
+    
+  
+  }
+  
+  figure {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+  }
