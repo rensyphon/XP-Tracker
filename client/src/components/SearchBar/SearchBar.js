@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
 import './SearchBar.css';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import SearchBar from "material-ui-search-bar";
+import { ThemeProvider } from '@mui/material/styles'
+// import logo from '..//..//assets/images/xp-tracker-logo.png';
+
+const logo = require('./assets/images/xp-tracker-logo.png'); 
 
 
 export default function SearchBar() {
+
+    const [searchItem, setSearchItem] = useState("");
+    
     return (
 <>
-<div class="box">
-    <div class="control columns is-vcentered">
-      <figure class="image is-3">
-        <img class="is-rounded" src="//xplogo" />
+    <div className="box">
+    <div >
+      <figure >
+        <img className="logo-img" src={ logo.default } alt='logo'/>
       </figure>
-      <TextField classname='text-area'id="outlined-basic" label="search for game" variant="outlined" />
-      <Stack spacing={2} direction="row">
-      <Button variant="text">search</Button>
-
-    </Stack>
+      <ThemeProvider>
+      <div className="main-content">
+ 
+        <SearchBar
+          value={searchItem}
+          onChange={value => {
+            setSearchItem(value);
+          }}
+          onRequestSearch={() => console.log("onRequestSearch")}
+          style={{
+            margin: "0 auto",
+            maxWidth: 900
+          }}
+        />
+      </div>
+    </ThemeProvider>
     </div>
     </div>
 </>
