@@ -1,7 +1,7 @@
 //TODO: refactor
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models');
+const { User, Game } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -38,6 +38,7 @@ const resolvers = {
 
       return { token, user };
     },
+    // Use to add games or remove game?
     saveBook: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
@@ -49,7 +50,21 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeBook: async (parent, args, context) => {
+
+    addGame: aysnc (parent, { description, title, genre }, context) => {
+      if (context.user) {
+        const game = await Game.create({
+          description,
+          title,
+          genre,
+        });
+
+        return game;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    
+    removeGame: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
