@@ -1,10 +1,10 @@
-//TODO: refactor
-
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+
 // import schema from Game.js
 const gameSchema = require('./Game');
+
 
 const userSchema = new Schema(
   {
@@ -12,6 +12,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
     email: {
       type: String,
@@ -22,16 +23,12 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+      minlength: 8,
     },
     // set savedGames to be an array of data that adheres to the gameSchema
     savedGames: [gameSchema],
+
   },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
 );
 
 // hash user password

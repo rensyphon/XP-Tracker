@@ -38,7 +38,7 @@ const resolvers = {
 
       return { token, user };
     },
-    // UGameo add games or remove game?
+    // add games or remove game?
     saveBook: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
@@ -49,17 +49,17 @@ const resolvers = {
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
-    },Game
+    },
 
     addGame: aysnc (parent, { description, title, genre }, context) => {
       if (context.user) {
-        const game = awaitGamee.create({
+        const newGame = await Game.create({
           description,
           title,
-          genre,
+          genre
         });
 
-        return game;
+        return newGame;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
