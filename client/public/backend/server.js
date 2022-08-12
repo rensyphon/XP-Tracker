@@ -17,6 +17,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 app.use('/api/xp', require('./routes/xpRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.use(errorHandler)
 
