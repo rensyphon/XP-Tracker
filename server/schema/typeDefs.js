@@ -9,7 +9,7 @@ const typeDefs = gql`
     email: String!
     password: String!
   }
-
+GameGame
   type Game {
     gameId: ID!
     description: String!
@@ -17,7 +17,7 @@ const typeDefs = gql`
     genre: String!
     reviews: [Review]!
   }
-
+Game
   type Review {
     _id: ID
     reviewText: String
@@ -35,8 +35,8 @@ const typeDefs = gql`
     games(username: String!): [Game]
     game(gameId: ID!): Game
     me: User
-  }
-
+  }Game
+Game
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth

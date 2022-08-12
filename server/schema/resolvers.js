@@ -38,22 +38,22 @@ const resolvers = {
 
       return { token, user };
     },
-    // Use to add games or remove game?
+    // UGameo add games or remove game?
     saveBook: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
+          { _id: context.user.Game},
           { $addToSet: { savedBooks: input } },
           { new: true }
         );
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
-    },
+    },Game
 
     addGame: aysnc (parent, { description, title, genre }, context) => {
       if (context.user) {
-        const game = await Game.create({
+        const game = awaitGamee.create({
           description,
           title,
           genre,
@@ -68,7 +68,7 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: args.bookId } } },
+          { $pull: { savedBooks: { gameId: args.gameId } } },
           { new: true }
         );
         return updatedUser;
