@@ -4,19 +4,19 @@ import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeGameId } from '../utils/localStorage';
 
 import { useQuery, useMutation } from '@apollo/react-hooks'; 
 import { GET_ME } from '../utils/queries';
-import { REMOVE_BOOK } from '../utils/mutations'
+import { REMOVE_GAME } from '../utils/mutations'
 
-const SavedBooks = () => {
+const SavedGames = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  const [removeGame, { error }] = useMutation(REMOVE_GAME);
   const userData = data?.me || {};
   
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId) => {
+  // create function that accepts the game's mongo _id value as param and deletes the game from the database
+  const handleDeleteGame = async (gameId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -24,16 +24,16 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook({
-        variables: { bookId: bookId },
+      const response = await removeGame({
+        variables: { gameId: gameId },
       });
 
       if (!response) {
         throw new Error("something went wrong!");
       }
 
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      // upon success, remove game's id from localStorage
+      removeGameId(gameId);
     } catch (err) {
       console.error(error);
     }
@@ -48,26 +48,26 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing saved games!</h1>
         </Container>
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+          {userData.savedGames.length
+            ? `Viewing ${userData.savedGames.length} saved ${userData.savedGames.length === 1 ? 'game' : 'games'}:`
+            : 'You have no saved games!'}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.savedGames.map((game) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
+              <Card key={game.gameId} border='dark'>
+                {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
-                    Delete this Book!
+                  <Card.Title>{game.title}</Card.Title>
+                  <p className='small'>Authors: {game.authors}</p>
+                  <Card.Text>{game.description}</Card.Text>
+                  <Button className='btn-block btn-danger' onClick={() => handleDeleteGame(game.gameId)}>
+                    Delete this game!
                   </Button>
                 </Card.Body>
               </Card>
@@ -79,4 +79,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedGames;
