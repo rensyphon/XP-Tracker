@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Xp = require ('../model/xpModel')
+const Xp = require ('../models/xpModel')
 // Get Xp 
 // @route GET /api/xp
 // @access authentication will be required
