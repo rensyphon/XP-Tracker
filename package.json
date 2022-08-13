@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@headlessui/react": "^1.6.6",
@@ -16,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "coloras": "^2.0.2",
     "colors": "^1.4.0",
+    "concurrently": "^7.3.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
@@ -30,7 +32,9 @@
   "scripts": {
     "start": "node client/public/backend/server.js",
     "server": "nodemon client/public/backend/server.js",
-    "build": "react-scripts build",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -53,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "concurrently": "^5.1.0"
   }
 }
