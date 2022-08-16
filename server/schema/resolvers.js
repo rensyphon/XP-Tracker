@@ -1,7 +1,7 @@
 //TODO: refactor
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Game } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -39,11 +39,11 @@ const resolvers = {
       return { token, user };
     },
     // add games or remove game?
-    saveBook: async (parent, args, context) => {
+    saveGame: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user.Game},
-          { $addToSet: { savedBooks: input } },
+          { $addToSet: { savedGames: input } },
           { new: true }
         );
         return updatedUser;
@@ -51,24 +51,24 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addGame: aysnc (parent, { description, title, genre }, context) => {
-      if (context.user) {
-        const newGame = await Game.create({
-          description,
-          title,
-          genre
-        });
+    // addGame: async (parent, { description, title, genre }, context) => {
+    //   if (context.user) {
+    //     const newGame = await Game.create({
+    //       description,
+    //       title,
+    //       genre
+    //     });
 
-        return newGame;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    //     return newGame;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
     
     removeGame: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { gameId: args.gameId } } },
+          { $pull: { savedGames: { gameId: args.gameId } } },
           { new: true }
         );
         return updatedUser;
