@@ -46,9 +46,9 @@ const gameSchema = new Schema({
       reviewAuthor: {
         type: String,
         required: true,
-      },
-    },
-  ],
+      }
+    }
+  ]
 });
 const Game = model('Game', gameSchema);
 

@@ -1,7 +1,7 @@
 //TODO: refactor
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Game } = require('../models');
+const { Game } = require('../models/Game');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -51,18 +51,9 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addGame: aysnc (parent, { description, title, genre }, context) => {
-      if (context.user) {
-        const newGame = await Game.create({
-          description,
-          title,
-          genre
-        });
-
-        return newGame;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    addGame: async (parent, { description, title, genre }) => {
+      return Game.create({ description, title, genre});
+      },
     
     removeGame: async (parent, args, context) => {
       if (context.user) {
