@@ -1,6 +1,6 @@
 //TODO: refactor and add in:
 
-import React from 'react';
+import React, { useState} from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -39,6 +39,17 @@ const client = new ApolloClient({
 });
 
 function App() {
+  // API for search bar =================================================================================================
+  const [state, setState] = useState({
+    results: []
+  });
+  const onSearch = async (text) => {
+    const results = await GameSource.get("/")
+    setState(prevState => {
+      return {...prevState, results: results}
+    })
+  }
+//================ testing for API=================================================================
   return (
     <ApolloProvider client={client}>
     <Router>
