@@ -1,6 +1,7 @@
 //TODO: refactor
 
 const { AuthenticationError } = require('apollo-server-express');
+const { Game } = require('../models/Game');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -16,8 +17,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, {username, email, password}) => {
+      const user = await User.create({username, email, password});
       const token = signToken(user);
       return { token, user };
     },
@@ -50,31 +51,68 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    // this addGame resolver works but it doesnt have any login authentication functionality
+    // addGame: async (parent, { description, title, genre }) => {
+    //   return Game.create({ description, title, genre});
+    //   },
+     addGame: async (parent, { description, title, genre }, context) => {
+       if (context.user) {
+         const newGame = await Game.create({
+           description,
+           title,
+           genre
+         });
 
-    // addGame: async (parent, { description, title, genre }, context) => {
-    //   if (context.user) {
-    //     const newGame = await Game.create({
-    //       description,
-    //       title,
-    //       genre
-    //     });
+         return newGame;
+       }
+       throw new AuthenticationError('You need to be logged in!');
+     },
+     
+      removeGame: async (parent, { gameId }) => {
+        return Game.findOneAndDelete({ _id: gameId});
+      },
 
-    //     return newGame;
+     //removeSavedGame: async (parent, args, context) => {
+     //  if (context.user) {
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { savedGames: { gameId: args.gameId } } },
+    //       { new: true }
+    //     );
+    //     return updatedUser;
     //   }
-    //   throw new AuthenticationError('You need to be logged in!');
+    //   throw new AuthenticationError('You need to be logged in!')
     // },
-    
-    removeGame: async (parent, args, context) => {
+
+    addReview: async (parent, { gameId, reviewText }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedGames: { gameId: args.gameId } } },
-          { new: true }
+        return Game.findByIdAndUpdate(
+          {_id: gameId },
+          {
+            $addToSet: {
+              review: { reviewText, reviewAuthor: context.user.username },   
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
         );
-        return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!')
-    }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+     removeReview: async (parent, args, context) => {
+       if (context.user){
+         const updatedGame = await Game.findOneAndUpdate(
+           {_id: context.gameId },
+          { $pull: { review: { _id: args.reviewId } } },
+          { new: true }
+       );
+       return updatedGame;
+      }
+       throw new AuthenticationError('You need to be logged in!')
+     },
   },
 };
 

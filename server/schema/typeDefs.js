@@ -1,4 +1,3 @@
-//TODO: refactor
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -40,9 +39,11 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveGame(description: String!, title: String!, genre: String!): User
-    removeGame(gameId: ID!): User
+    addGame(description: String!, title: String!, genre: String!): Game
+    removeGame(gameId: ID!): Game
     addReview(gameId: ID!, reviewText: String!): Game
     removeReview(gameId: ID!, reviewId: ID!): Game
+
   }
 `;
 // addGame(description: String!, title: String!, genre: String!): Game
