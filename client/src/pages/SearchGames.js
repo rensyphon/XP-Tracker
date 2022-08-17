@@ -7,10 +7,10 @@ import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 
 import { useMutation } from '@apollo/react-hooks';
-import { SAVE_BOOK } from '../utils/mutations';
+import { SAVE_GAME } from '../utils/mutations';
 
 const SearchGames = () => {
-  // create state for holding returned google api data
+  // create state for holding returned api data
   const [searchedGames, setSearchedGames] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
@@ -18,7 +18,7 @@ const SearchGames = () => {
   // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
   // create mutation to save game
-  const [saveGame] = useMutation(SAVE_BOOK);
+  const [saveGame] = useMutation(SAVE_GAME);
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup

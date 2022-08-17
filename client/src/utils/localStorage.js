@@ -1,7 +1,7 @@
 //TODO: refactor
 
 export const getSavedGameIds = () => {
-    const savedGamesIds = localStorage.getItem('saved_games')
+    const savedGameIds = localStorage.getItem('saved_games')
       ? JSON.parse(localStorage.getItem('saved_games'))
       : [];
   
@@ -26,7 +26,7 @@ export const getSavedGameIds = () => {
     }
   
     const updatedSavedGameIds = savedGameIds?.filter((savedGameId) => savedGameId !== gameId);
-    localStorage.setItem('saved_games', JSON.stringify(updatedSavedGamesIds));
+    localStorage.setItem('saved_games', JSON.stringify(updatedSavedGameIds));
   
     return true;
   };
