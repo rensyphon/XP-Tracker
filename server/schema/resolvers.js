@@ -51,7 +51,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
     // this addGame resolver works but it doesnt have any login authentication functionality
     // addGame: async (parent, { description, title, genre }) => {
     //   return Game.create({ description, title, genre});
@@ -68,7 +67,7 @@ const resolvers = {
        }
        throw new AuthenticationError('You need to be logged in!');
      },
-
+     
       removeGame: async (parent, { gameId }) => {
         return Game.findOneAndDelete({ _id: gameId});
       },
