@@ -1,6 +1,8 @@
-import * as React from 'react';
+
 import React from "react";
 import { SocialIcon } from "react-social-icons";
+import '../Footer/Footer.css'
+import logo from '../../assets/images/xp-tracker-logo.png'
 
 export default function Footer() {
   return (
@@ -12,21 +14,21 @@ export default function Footer() {
             <div className="footer-logo">
               <a href="/" title="XPtracker">
                 <img
-                  src="./assets/images/xp-tracker-logo.png"
-                  width="32"
+                  src={logo}
+                  width="200px"
                   alt="XPtracker-Logo"
                   className="img-fluid"
                 />
-                XPtracker
+                
               </a>
-              <p className="tagline">we track you stack.</p>
+              <p className="tagline"></p>
             </div>
           </div>
           <div className="col-md-2">
             <h4>Links</h4>
             <ul className="footer-link">
               <li>
-                <a href="#" title="Home">
+                <a href="/" title="Home">
                   Home
                 </a>
               </li>
@@ -36,12 +38,12 @@ export default function Footer() {
             <h4>About Us</h4>
             <ul className="footer-link">
               <li>
-                <a href="#" title="Faq">
+                <a href="instagram.com" title="Faq">
                   Faq
                 </a>
               </li>
               <li>
-                <a href="#" title="Blog">
+                <a href="twitter.com" title="Blog">
                   Blog
                 </a>
               </li>
