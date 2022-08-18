@@ -1,5 +1,5 @@
 //TODO: refactor and add in:
-
+import GameSource from './api/GameSource'
 import React, { useState} from 'react';
 import {
   ApolloClient,
