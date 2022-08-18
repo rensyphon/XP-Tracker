@@ -1,5 +1,3 @@
-//TODO: refactor
-
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
@@ -8,6 +6,9 @@ import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 
 import { useMutation } from '@apollo/react-hooks';
 import { SAVE_GAME } from '../utils/mutations';
+
+
+import {getGames} from "../utils/api";
 
 const SearchGames = () => {
   // create state for holding returned api data
@@ -35,20 +36,12 @@ const SearchGames = () => {
     }
 
     try {
-      const response = await fetch(`https://www.googleapis.com/games/v1/volumes?q=${searchInput}`);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { items } = await response.json();
+      const items = await getGames(searchInput);
 
       const gameData = items.map((game) => ({
         gameId: game.id,
-        authors: game.volumeInfo.authors || ['No author to display'],
-        title: game.volumeInfo.title,
-        description: game.volumeInfo.description,
-        image: game.volumeInfo.imageLinks?.thumbnail || '',
+        title: game.name,
+        image: game.background_image || '',
       }));
 
       setSearchedGames(gameData);
@@ -124,8 +117,6 @@ const SearchGames = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{game.title}</Card.Title>
-                  <p className='small'>Authors: {game.authors}</p>
-                  <Card.Text>{game.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedGameIds?.some((savedGameId) => savedGameId === game.gameId)}

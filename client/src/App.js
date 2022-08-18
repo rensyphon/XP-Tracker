@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchGames from './pages/SearchGames';
 import SavedGames from './pages/SavedGames';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -39,17 +40,17 @@ const client = new ApolloClient({
 });
 
 function App() {
-  // API for search bar =================================================================================================
-  const [state, setState] = useState({
-    results: []
-  });
-  const onSearch = async (text) => {
-    const results = await GameSource.get("/")
-    setState(prevState => {
-      return {...prevState, results: results}
-    })
-  }
-//================ testing for API=================================================================
+//   // API for search bar =================================================================================================
+//   const [state, setState] = useState({
+//     results: []
+//   });
+//   const onSearch = async (text) => {
+//     const results = await GameSource.get("/")
+//     setState(prevState => {
+//       return {...prevState, results: results}
+//     })
+//   }
+// //================ testing for API=================================================================
   return (
     <ApolloProvider client={client}>
     <Router>
@@ -69,6 +70,7 @@ function App() {
             element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
+        <Footer />
       </>
     </Router>
     </ApolloProvider>
