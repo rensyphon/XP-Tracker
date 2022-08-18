@@ -13,6 +13,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchGames from './pages/SearchGames';
 import SavedGames from './pages/SavedGames';
 import Navbar from './components/Navbar';
+import GameSource from './api/GameSource'
+import Footer from './components/Footer/Footer';
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -69,6 +72,7 @@ function App() {
             element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
+        <Footer />
       </>
     </Router>
     </ApolloProvider>
