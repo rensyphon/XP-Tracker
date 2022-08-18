@@ -2,9 +2,10 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-
+require('dotenv').config();
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/connection');
+const axios = require('axios');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -24,6 +25,15 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+app.get('/games-search', async (req, res) => {
+  const {searchTerm} = req.query;
+  const {data} = await axios.get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+
+  // console.log('the response', data.results);
+
+  res.json(data.results);
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
