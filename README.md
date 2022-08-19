@@ -14,7 +14,7 @@ Our App was deployed through [Heroku](https://afternoon-sands-31650.herokuapp.co
 # Preview
 
     ```md
-    ![screenshot](assets/images/screenshot.png)
+    ![screenshot](assets/images/screenshot.jpg)
 
     ```
 
