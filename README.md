@@ -13,9 +13,7 @@ Our App was deployed through [Heroku](https://afternoon-sands-31650.herokuapp.co
 
 # Preview
 
-
-![](/XP-Tracker/assets/images/screenshot.jpg)
-
+![](/assets/images/screenshot.png)
 
 
 ## Usage
@@ -36,6 +34,8 @@ Caleb Norcross <a href= "https://github.com/CalebNorcross">@CalebNorcross</a>
 ## Credits
 
 Select code originally created by University of Arizona Full Stack Coding Boot Camp, 2022. https://bootcamp.ce.arizona.edu/coding/
+App initialized with [Create React App](https://create-react-app.dev/).
+RAWG Video Games Database utilized for search functionality. https://rawg.io/
 
 ## License
 
