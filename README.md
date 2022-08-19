@@ -27,8 +27,11 @@ Download the repository from [Github](https://github.com/rensyphon/XP-Tracker), 
 # Contributors
 
 Shane Hancock<a href= "https://github.com/shanehancock64">@shanehancock64</a>
+
 Daniel Leake<a href= "https://github.com/rensyphon">@rensyphon</a>
+
 Matthew Gonzales<a href= "https://github.com/mattyjtx">@mattyjtx</a>
+
 Caleb Norcross <a href= "https://github.com/CalebNorcross">@CalebNorcross</a>
 
 ## Credits
